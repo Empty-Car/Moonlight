@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 const BreathCircle = styled.div`
@@ -25,13 +25,40 @@ const breath = (max, min, name) => {
   intro();
 };
 
-const minuteToSec = (time) => {
+const minuteToMillisec = (time) => {
   return time * 60000;
+};
+
+const minuteToSec = (time) => {
+  return time * 60;
+};
+
+const padNumber = (num) => {
+  return String(num).padStart(2, "0");
 };
 
 const Meditation = () => {
   const [time, setTime] = useState(1);
+  console.log(time);
   const [isStart, setIsStart] = useState(false);
+
+  let initialTime = useRef(minuteToSec(time));
+  console.log(initialTime);
+  const interval = useRef(null);
+  const [min, setMin] = useState(padNumber(time));
+  const [sec, setSec] = useState(padNumber("0"));
+
+  useEffect(() => {
+    if (!isStart) return;
+
+    interval.current = setInterval(() => {
+      initialTime.current -= 1;
+      setSec(padNumber(initialTime.current % 60));
+      setMin(padNumber(parseInt(initialTime.current / 60)));
+    }, 1000);
+
+    return () => clearInterval(interval.current);
+  }, [isStart]);
 
   const onClickPlus = () => {
     setTime(time + 1);
@@ -44,9 +71,11 @@ const Meditation = () => {
   const onClickStart = () => {
     setIsStart(true);
 
+    initialTime.current *= 2;
+
     setTimeout(() => {
       onClickStop();
-    }, minuteToSec(time));
+    }, minuteToMillisec(time));
   };
 
   const onClickStop = () => {
@@ -75,7 +104,9 @@ const Meditation = () => {
       {isStart && (
         <>
           <button onClick={onClickStop}>명상 그만할게..</button>
-          
+          <div>
+            {min}:{sec}
+          </div>
           <BreathCircle className="ani" color="#EEDCC6"></BreathCircle>
           <BreathCircle className="ani1" color="#CAAE33"></BreathCircle>
           <BreathCircle className="ani2" color="#5B6A27"></BreathCircle>
