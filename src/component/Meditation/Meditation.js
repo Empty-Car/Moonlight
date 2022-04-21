@@ -25,6 +25,10 @@ const breath = (max, min, name) => {
   intro();
 };
 
+const minuteToSec = (time) => {
+  return time * 60000;
+};
+
 const Meditation = () => {
   const [time, setTime] = useState(1);
   const [isStart, setIsStart] = useState(false);
@@ -39,13 +43,20 @@ const Meditation = () => {
 
   const onClickStart = () => {
     setIsStart(true);
+
+    setTimeout(() => {
+      onClickStop();
+    }, minuteToSec(time));
   };
 
   const onClickStop = () => {
     setIsStart(false);
+    gsap.killTweensOf("*");
   };
 
   useEffect(() => {
+    if (!isStart) return;
+
     breath(2, 1.1, ".ani");
     breath(1.8, 0.9, ".ani1");
     breath(1.6, 0.7, ".ani2");
@@ -53,14 +64,18 @@ const Meditation = () => {
 
   return (
     <>
-      <div>{time}</div>
-      <button onClick={time >= 10 ? undefined : onClickPlus}>+1</button>
-      <button onClick={time <= 1 ? undefined : onClickMinus}>-1</button>
-
-      <button onClick={onClickStart}>명상 시작</button>
-      <button onClick={onClickStop}>명상 그만할게..</button>
+      {!isStart && (
+        <>
+          <div>{time}분 동안 명상을 하시려구여~? ^^</div>
+          <button onClick={time >= 10 ? undefined : onClickPlus}>+1min</button>
+          <button onClick={time <= 1 ? undefined : onClickMinus}>-1min</button>
+          <button onClick={onClickStart}>명상 시작</button>
+        </>
+      )}
       {isStart && (
         <>
+          <button onClick={onClickStop}>명상 그만할게..</button>
+          
           <BreathCircle className="ani" color="#EEDCC6"></BreathCircle>
           <BreathCircle className="ani1" color="#CAAE33"></BreathCircle>
           <BreathCircle className="ani2" color="#5B6A27"></BreathCircle>
