@@ -2,6 +2,8 @@ import gsap from "gsap";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Timer from "./Timer";
+import { useAudio } from "../hooks/useAudio";
+import sound from "../breathChange.mp3";
 
 const BreathCircle = styled.div`
   background-color: ${(props) => props.color};
@@ -16,11 +18,19 @@ const BreathCircle = styled.div`
 
 const breath = (max, min, name) => {
   const intro = () => {
-    gsap.to(name, { scale: max, duration: 4.3, onComplete: outro });
+    gsap.to(name, {
+      scale: max,
+      duration: 4.3,
+      onComplete: outro,
+    });
   };
 
   const outro = () => {
-    gsap.to(name, { scale: min, duration: 4.7, onComplete: intro });
+    gsap.to(name, {
+      scale: min,
+      duration: 4.7,
+      onComplete: intro,
+    });
   };
 
   intro();
@@ -33,6 +43,10 @@ const minuteToMillisec = (time) => {
 const Meditation = () => {
   const [time, setTime] = useState(1);
   const [isStart, setIsStart] = useState(false);
+  const [narration, setNarration] = useState(true);
+
+  const term = 5000;
+  const [playing, setPlaying] = useAudio(sound);
 
   const onClickPlus = () => {
     setTime(time + 1);
@@ -47,20 +61,23 @@ const Meditation = () => {
 
     setTimeout(() => {
       onClickStop();
-    }, minuteToMillisec(time) + 2000);
+    }, minuteToMillisec(time) + term + 2000);
   };
 
   const onClickStop = () => {
     setIsStart(false);
     gsap.killTweensOf("*");
+    setNarration(true);
   };
 
   useEffect(() => {
     if (!isStart) return;
-
-    breath(2, 1.1, ".ani");
-    breath(1.8, 0.9, ".ani1");
-    breath(1.6, 0.7, ".ani2");
+    setTimeout(() => {
+      setNarration(false);
+      breath(2, 1.1, ".ani");
+      breath(1.8, 0.9, ".ani1");
+      breath(1.6, 0.7, ".ani2");
+    }, term);
   }, [isStart]);
 
   return (
@@ -75,10 +92,16 @@ const Meditation = () => {
       )}
       {isStart && (
         <>
-          <div>몸의 긴장을 해소시켜봐요! </div>
-          <div>원이 커질 때 숨을 들이마시고, 작아질 때 숨을 뱉어봐요</div>
+          {narration ? (
+            <>
+              <div>몸의 긴장을 해소시켜봐요! </div>
+              <div>원이 커질 때 숨을 들이마시고, 작아질 때 숨을 내쉬어봐요</div>
+            </>
+          ) : (
+            <Timer m={time} s="0"></Timer>
+          )}
+
           <button onClick={onClickStop}>명상 그만할게..</button>
-          <Timer m={time} s="0"></Timer>
           <BreathCircle className="ani" color="#EEDCC6"></BreathCircle>
           <BreathCircle className="ani1" color="#CAAE33"></BreathCircle>
           <BreathCircle className="ani2" color="#5B6A27"></BreathCircle>
