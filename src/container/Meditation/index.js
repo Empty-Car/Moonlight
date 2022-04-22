@@ -1,4 +1,4 @@
-import Meditation from "../../component/Meditation/Meditation";
+import Meditation from "../../component/Meditation";
 
 const MeditationContainer = () => {
   return <Meditation />;
