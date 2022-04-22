@@ -16,26 +16,6 @@ const BreathCircle = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const breath = (max, min, name) => {
-  const intro = () => {
-    gsap.to(name, {
-      scale: max,
-      duration: 4.3,
-      onComplete: outro,
-    });
-  };
-
-  const outro = () => {
-    gsap.to(name, {
-      scale: min,
-      duration: 4.7,
-      onComplete: intro,
-    });
-  };
-
-  intro();
-};
-
 const minuteToMillisec = (time) => {
   return time * 60000;
 };
@@ -61,13 +41,39 @@ const Meditation = () => {
 
     setTimeout(() => {
       onClickStop();
-    }, minuteToMillisec(time) + term + 2000);
+    }, minuteToMillisec(time) + term + 3000);
   };
 
   const onClickStop = () => {
     setIsStart(false);
     gsap.killTweensOf("*");
     setNarration(true);
+  };
+
+  const breath = (max, min, name) => {
+    const intro = () => {
+      gsap.to(name, {
+        scale: max,
+        duration: 4.3,
+        onComplete: () => {
+          setPlaying();
+          outro();
+        },
+      });
+    };
+
+    const outro = () => {
+      gsap.to(name, {
+        scale: min,
+        duration: 4.7,
+        onComplete: () => {
+          setPlaying();
+          intro();
+        },
+      });
+    };
+
+    intro();
   };
 
   useEffect(() => {
