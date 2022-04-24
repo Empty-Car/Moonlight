@@ -7,9 +7,25 @@ const Main = () => {
     navigate("meditation");
   };
 
+  const onClickReminisce = () => {
+    navigate("reminisce");
+  };
+
+  const onClickRecordEmotion = () => {
+    navigate("record-emotion");
+  };
+
   return (
     <>
-      <button onClick={onClickMeditation}>명상하러 드가자~</button>
+      <div>
+        <button onClick={onClickMeditation}>명상하러 드가자~</button>
+      </div>
+      <div>
+        <button onClick={onClickRecordEmotion}>감정을 기록하러 드가자~</button>
+      </div>
+      <div>
+        <button onClick={onClickReminisce}>회상하러 드가자~</button>
+      </div>
     </>
   );
 };

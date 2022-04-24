@@ -5,10 +5,64 @@ import Timer from "./Timer";
 import { useAudio } from "../hooks/useAudio";
 import sound from "../breathChange.mp3";
 
+const MeditationBox = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const PlusMinusButtonBox = styled.div`
+  margin-top: 50px;
+`;
+
+const PlusMinusButton = styled.button`
+  display: inline-block;
+  vertical-align: middle;
+  flex-wrap: wrap;
+  color: ${(props) => props.color};
+  background-color: white;
+  border: none;
+  outline: none;
+  font-size: 40px;
+`;
+const ActiveButton = styled.button`
+  background-color: ${(props) => props.backgroundColor};
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+
+  width: 540px;
+  height: 60px;
+  font-size: 24px;
+
+  margin-top: 200px;
+`;
+
+const LightLetter = styled.div`
+  color: #c4c4c4;
+  height: 30px;
+  font-size: 20px;
+`;
+
+const DisplayMeditationTime = styled.div`
+  width: 216;
+  height: 121;
+  font-size: 100px;
+`;
+
+const NarrationText = styled.div`
+  width: 600px;
+  height: 50px;
+  font-size: 40px;
+`;
+
 const BreathCircle = styled.div`
   background-color: ${(props) => props.color};
-  width: 200px;
-  height: 200px;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -25,7 +79,7 @@ const Meditation = () => {
   const [isStart, setIsStart] = useState(false);
   const [narration, setNarration] = useState(true);
 
-  const term = 5000;
+  const term = 500000;
   const [playing, setPlaying] = useAudio(sound);
 
   const onClickPlus = () => {
@@ -80,40 +134,72 @@ const Meditation = () => {
     if (!isStart) return;
     setTimeout(() => {
       setNarration(false);
-      breath(2, 1.1, ".ani");
-      breath(1.8, 0.9, ".ani1");
-      breath(1.6, 0.7, ".ani2");
+      breath(1.5, 1.1, ".ani");
+      // breath(1.8, 0.9, ".ani1");
+      // breath(1.6, 0.7, ".ani2");
     }, term);
   }, [isStart]);
 
   return (
-    <>
+    <MeditationBox>
       {!isStart && (
         <>
-          <div>{time}분 동안 명상을 하시려구여~? ^^</div>
-          <button onClick={time >= 10 ? undefined : onClickPlus}>+1min</button>
-          <button onClick={time <= 1 ? undefined : onClickMinus}>-1min</button>
-          <button onClick={onClickStart}>명상 시작</button>
+          <DisplayMeditationTime>{time}:00</DisplayMeditationTime>
+          <LightLetter>명상 시간은 최소 1분에서 최대 10분입니다.</LightLetter>
+          <PlusMinusButtonBox>
+            <PlusMinusButton
+              onClick={time >= 10 ? undefined : onClickPlus}
+              color="#858585"
+            >
+              +1:00
+            </PlusMinusButton>
+            <PlusMinusButton
+              onClick={time <= 1 ? undefined : onClickMinus}
+              color="#F8A6A6"
+            >
+              -1:00
+            </PlusMinusButton>
+          </PlusMinusButtonBox>
+          <ActiveButton onClick={onClickStart} backgroundColor="#F8A6A6">
+            명상 시작
+          </ActiveButton>
         </>
       )}
       {isStart && (
         <>
           {narration ? (
             <>
-              <div>몸의 긴장을 해소시켜봐요! </div>
-              <div>원이 커질 때 숨을 들이마시고, 작아질 때 숨을 내쉬어봐요</div>
+              <Timer m="0" s={term / 1000}></Timer>
+              <NarrationText>몸의 긴장을 해소시켜봐요! </NarrationText>
+              <LightLetter>
+                원이 커질 때 숨을 들이마시고, 작아질 때 숨을 내쉬어봐요
+              </LightLetter>
             </>
           ) : (
-            <Timer m={time} s="0"></Timer>
+            <div>
+              <Timer m={time} s="0"></Timer>
+              <BreathCircle
+                className="ani"
+                color="#FFF0F0"
+                width="300px"
+                height="300px"
+              ></BreathCircle>
+              <BreathCircle
+                color="#FBC4C4"
+                width="250px"
+                height="250px"
+              ></BreathCircle>
+              <BreathCircle
+                color="#F8A6A6"
+                width="200px"
+                height="200px"
+              ></BreathCircle>
+            </div>
           )}
-
-          <button onClick={onClickStop}>명상 그만할게..</button>
-          <BreathCircle className="ani" color="#EEDCC6"></BreathCircle>
-          <BreathCircle className="ani1" color="#CAAE33"></BreathCircle>
-          <BreathCircle className="ani2" color="#5B6A27"></BreathCircle>
+          <ActiveButton onClick={onClickStop}>다음에 명상하기</ActiveButton>
         </>
       )}
-    </>
+    </MeditationBox>
   );
 };
 
