@@ -18,6 +18,8 @@ const PlusMinusButtonBox = styled.div`
 `;
 
 const PlusMinusButton = styled.button`
+  cursor: pointer;
+
   display: inline-block;
   vertical-align: middle;
   flex-wrap: wrap;
@@ -39,8 +41,31 @@ const ActiveButton = styled.button`
   width: 540px;
   height: 60px;
   font-size: 24px;
+  cursor: pointer;
 
-  margin-top: 200px;
+  margin-top: 150px;
+
+  ${(props) =>
+    props.narration &&
+    props.isStart &&
+    css`
+      /* margin-top: 1000px; */
+      background-color: tomato;
+
+      & .hovered {
+        display: none;
+      }
+
+      &:hover {
+        & .not-hover {
+          display: none;
+        }
+
+        & .hovered 
+          display: unset;
+        }
+      }
+    `}
 `;
 
 const LightLetter = styled.div`
@@ -207,9 +232,16 @@ const Meditation = () => {
                 width="200px"
                 height="200px"
               ></BreathCircle>
-              <ActiveButton onClick={onClickStop} backgroundColor="#c4c4c4">
-              <Timer m={time} s="0" narration={narration}></Timer>
-                
+              <ActiveButton
+                onClick={onClickStop}
+                backgroundColor="#c4c4c4"
+                isStart={isStart}
+                narration={narration}
+              >
+                <span className="not-hover">
+                  <Timer m={time} s="0" narration={narration}></Timer>
+                </span>
+                <span className="hovered">명상 그만하기</span>
               </ActiveButton>
             </div>
           )}
