@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
+import styled, { css } from "styled-components";
+
+const TimerBox = styled.div`
+  font-size: 100px;
+  font-weight: 600px;
+  margin-bottom: 40px;
+
+  ${(props) =>
+    !props.narration &&
+    css`
+      font-size: 30px;
+      color: white;
+    `}
+`;
 
 const padNumber = (num) => {
   return String(num).padStart(2, "0");
 };
 
-const Timer = ({ m, s }) => {
+const Timer = ({ m, s, narration }) => {
   const [min, setMin] = useState(parseInt(m));
   const [sec, setSec] = useState(parseInt(s));
 
@@ -26,9 +40,15 @@ const Timer = ({ m, s }) => {
   }, [min, sec]);
 
   return (
-    <div>
-      {padNumber(min)}:{padNumber(sec)}
-    </div>
+    <TimerBox narration={narration}>
+      {narration ? (
+        <div>{sec}</div>
+      ) : (
+        <div>
+          {padNumber(min)}:{padNumber(sec)}
+        </div>
+      )}
+    </TimerBox>
   );
 };
 

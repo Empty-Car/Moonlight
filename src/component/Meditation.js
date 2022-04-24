@@ -1,6 +1,6 @@
 import gsap from "gsap";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Timer from "./Timer";
 import { useAudio } from "../hooks/useAudio";
 import sound from "../breathChange.mp3";
@@ -26,6 +26,8 @@ const PlusMinusButton = styled.button`
   border: none;
   outline: none;
   font-size: 40px;
+  margin-left: 30px;
+  margin-right: 30px;
 `;
 const ActiveButton = styled.button`
   background-color: ${(props) => props.backgroundColor};
@@ -45,6 +47,13 @@ const LightLetter = styled.div`
   color: #c4c4c4;
   height: 30px;
   font-size: 20px;
+  text-align: center;
+
+  ${(props) =>
+    props.narration &&
+    css`
+      margin-top: 30px;
+    `}
 `;
 
 const DisplayMeditationTime = styled.div`
@@ -57,6 +66,8 @@ const NarrationText = styled.div`
   width: 600px;
   height: 50px;
   font-size: 40px;
+  text-align: center;
+  font-weight: 600px;
 `;
 
 const BreathCircle = styled.div`
@@ -79,7 +90,7 @@ const Meditation = () => {
   const [isStart, setIsStart] = useState(false);
   const [narration, setNarration] = useState(true);
 
-  const term = 500000;
+  const term = 5000;
   const [playing, setPlaying] = useAudio(sound);
 
   const onClickPlus = () => {
@@ -149,13 +160,13 @@ const Meditation = () => {
           <PlusMinusButtonBox>
             <PlusMinusButton
               onClick={time >= 10 ? undefined : onClickPlus}
-              color="#858585"
+              color="#F8A6A6"
             >
               +1:00
             </PlusMinusButton>
             <PlusMinusButton
               onClick={time <= 1 ? undefined : onClickMinus}
-              color="#F8A6A6"
+              color="#858585"
             >
               -1:00
             </PlusMinusButton>
@@ -169,15 +180,17 @@ const Meditation = () => {
         <>
           {narration ? (
             <>
-              <Timer m="0" s={term / 1000}></Timer>
+              <Timer m="0" s={term / 1000} narration={narration}></Timer>
               <NarrationText>몸의 긴장을 해소시켜봐요! </NarrationText>
-              <LightLetter>
+              <LightLetter narration={narration}>
                 원이 커질 때 숨을 들이마시고, 작아질 때 숨을 내쉬어봐요
               </LightLetter>
+              <ActiveButton onClick={onClickStop} backgroundColor="#c4c4c4">
+                다음에 명상하기
+              </ActiveButton>
             </>
           ) : (
             <div>
-              <Timer m={time} s="0"></Timer>
               <BreathCircle
                 className="ani"
                 color="#FFF0F0"
@@ -194,9 +207,12 @@ const Meditation = () => {
                 width="200px"
                 height="200px"
               ></BreathCircle>
+              <ActiveButton onClick={onClickStop} backgroundColor="#c4c4c4">
+              <Timer m={time} s="0" narration={narration}></Timer>
+                
+              </ActiveButton>
             </div>
           )}
-          <ActiveButton onClick={onClickStop}>다음에 명상하기</ActiveButton>
         </>
       )}
     </MeditationBox>
