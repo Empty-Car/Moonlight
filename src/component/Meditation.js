@@ -182,9 +182,12 @@ const Meditation = () => {
     setNarrationTimeout(
       setTimeout(() => {
         setNarration(false);
-        breath(1.6, 1.1, ".ani");
-        breath(1.4, 0.9, ".ani1");
-        breath(1.2, 0.7, ".ani2");
+
+        setTimeout(() => {
+          breath(1.6, 1.1, ".ani");
+          breath(1.4, 0.9, ".ani1");
+          breath(1.2, 0.7, ".ani2");
+        }, 100);
       }, term)
     );
   }, [isStart]);
