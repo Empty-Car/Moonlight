@@ -118,6 +118,9 @@ const Meditation = () => {
   const [isStart, setIsStart] = useState(false);
   const [narration, setNarration] = useState(true);
 
+  const [meditationTimeout, setMeditationTimeout] = useState(null);
+  const [narrationTimeout, setNarrationTimeout] = useState(null);
+
   const term = 5000;
   const [playing, setPlaying] = useAudio(sound);
 
@@ -132,16 +135,19 @@ const Meditation = () => {
   const onClickStart = () => {
     setIsStart(true);
 
-    const meditationTime = setTimeout(() => {
-      onClickStop();
-    }, minuteToMillisec(time) + term + 3000);
-    clearTimeout(meditationTime);
+    setMeditationTimeout(
+      setTimeout(() => {
+        onClickStop();
+      }, minuteToMillisec(time) + term + 3000)
+    );
   };
 
   const onClickStop = () => {
     setIsStart(false);
     gsap.killTweensOf("*");
     setNarration(true);
+    clearTimeout(narrationTimeout);
+    clearTimeout(meditationTimeout);
   };
 
   const breath = (max, min, name) => {
@@ -173,14 +179,14 @@ const Meditation = () => {
   useEffect(() => {
     if (!isStart) return;
 
-    const narrationTime = setTimeout(() => {
-      setNarration(false);
-      breath(1.6, 1.1, ".ani");
-      breath(1.4, 0.9, ".ani1");
-      breath(1.2, 0.7, ".ani2");
-    }, term);
-
-    clearTimeout(narrationTime);
+    setNarrationTimeout(
+      setTimeout(() => {
+        setNarration(false);
+        breath(1.6, 1.1, ".ani");
+        breath(1.4, 0.9, ".ani1");
+        breath(1.2, 0.7, ".ani2");
+      }, term)
+    );
   }, [isStart]);
 
   return (
