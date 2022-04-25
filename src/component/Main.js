@@ -1,4 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import styled from 'styled-components'
+
+const MainBox = styled.div`
+  padding-top: 100px;
+`
 
 const Main = () => {
   const navigate = useNavigate();
@@ -16,7 +21,7 @@ const Main = () => {
   };
 
   return (
-    <>
+    <MainBox>
       <div>
         <button onClick={onClickMeditation}>명상하러 드가자~</button>
       </div>
@@ -26,7 +31,7 @@ const Main = () => {
       <div>
         <button onClick={onClickReminisce}>회상하러 드가자~</button>
       </div>
-    </>
+    </MainBox>
   );
 };
 

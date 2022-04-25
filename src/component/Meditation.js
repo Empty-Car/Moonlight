@@ -55,7 +55,6 @@ const ActiveButton = styled.button`
       bottom: 100px;
       transform: translate(-50%, 50%);
 
-
       & .hovered {
         display: none;
       }
@@ -133,9 +132,10 @@ const Meditation = () => {
   const onClickStart = () => {
     setIsStart(true);
 
-    setTimeout(() => {
+    const meditationTime = setTimeout(() => {
       onClickStop();
     }, minuteToMillisec(time) + term + 3000);
+    clearTimeout(meditationTime);
   };
 
   const onClickStop = () => {
@@ -172,12 +172,15 @@ const Meditation = () => {
 
   useEffect(() => {
     if (!isStart) return;
-    setTimeout(() => {
+
+    const narrationTime = setTimeout(() => {
       setNarration(false);
       breath(1.6, 1.1, ".ani");
       breath(1.4, 0.9, ".ani1");
       breath(1.2, 0.7, ".ani2");
     }, term);
+
+    clearTimeout(narrationTime);
   }, [isStart]);
 
   return (
@@ -227,13 +230,13 @@ const Meditation = () => {
                 height="300px"
               ></BreathCircle>
               <BreathCircle
-              className="ani1"
+                className="ani1"
                 color="#FBC4C4"
                 width="250px"
                 height="250px"
               ></BreathCircle>
               <BreathCircle
-              className="ani2"
+                className="ani2"
                 color="#F8A6A6"
                 width="200px"
                 height="200px"
