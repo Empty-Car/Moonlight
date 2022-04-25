@@ -11,6 +11,7 @@ const TimerBox = styled.div`
     css`
       font-size: 30px;
       color: white;
+      margin-bottom: 0px;
     `}
 `;
 

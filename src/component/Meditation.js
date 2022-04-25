@@ -37,6 +37,7 @@ const ActiveButton = styled.button`
   border: none;
   outline: none;
   border-radius: 10px;
+  font-weight: bold;
 
   width: 540px;
   height: 60px;
@@ -46,11 +47,15 @@ const ActiveButton = styled.button`
   margin-top: 150px;
 
   ${(props) =>
-    props.narration &&
+    // props.narration &&
     props.isStart &&
     css`
-      /* margin-top: 1000px; */
-      background-color: tomato;
+      position: absolute;
+      left: 50%;
+      bottom: 100px;
+      transform: translate(-50%, 50%);
+      /* align-items: center; */
+      /* justify-content: center; */
 
       & .hovered {
         display: none;
@@ -61,7 +66,7 @@ const ActiveButton = styled.button`
           display: none;
         }
 
-        & .hovered 
+        & .hovered {
           display: unset;
         }
       }
@@ -101,7 +106,7 @@ const BreathCircle = styled.div`
   height: ${(props) => props.height};
   border-radius: 50%;
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
