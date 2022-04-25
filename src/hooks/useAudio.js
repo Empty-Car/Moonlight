@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-export const useAudio = (url) => {
-  const [audio] = useState(new Audio(url));
+export const useAudio = (path) => {
+  const [audio] = useState(new Audio(path));
   const [playing, setPlaying] = useState(false);
 
   const toggle = () => setPlaying(!playing);

@@ -1,36 +1,30 @@
-import { useNavigate } from "react-router-dom";
-import styled from 'styled-components'
+import styled from "styled-components";
+import { useAudio } from "../hooks/useAudio";
+import backgroundMusic from "../background_music.mp3";
+import { MdPause, MdPlayArrow } from "react-icons/md";
 
 const MainBox = styled.div`
   padding-top: 100px;
-`
+`;
 
 const Main = () => {
-  const navigate = useNavigate();
+  const [playing, setPlaying] = useAudio(backgroundMusic);
 
-  const onClickMeditation = () => {
-    navigate("meditation");
-  };
-
-  const onClickReminisce = () => {
-    navigate("reminisce");
-  };
-
-  const onClickRecordEmotion = () => {
-    navigate("record-emotion");
+  const onClick = () => {
+    setPlaying();
   };
 
   return (
     <MainBox>
-      <div>
-        <button onClick={onClickMeditation}>명상하러 드가자~</button>
-      </div>
-      <div>
-        <button onClick={onClickRecordEmotion}>감정을 기록하러 드가자~</button>
-      </div>
-      <div>
-        <button onClick={onClickReminisce}>회상하러 드가자~</button>
-      </div>
+      {playing ? (
+        <div onClick={onClick}>
+          <MdPause />
+        </div>
+      ) : (
+        <div onClick={onClick}>
+          <MdPlayArrow />
+        </div>
+      )}
     </MainBox>
   );
 };

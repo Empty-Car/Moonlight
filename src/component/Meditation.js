@@ -32,6 +32,7 @@ const PlusMinusButton = styled.button`
   margin-left: 30px;
   margin-right: 30px;
 `;
+
 const ActiveButton = styled.button`
   background-color: ${(props) => props.backgroundColor};
   color: white;
@@ -125,6 +126,7 @@ const Meditation = () => {
   const [playing, setPlaying] = useAudio(sound);
 
   const onClickPlus = useCallback ( () => {
+    
     setTime(time + 1);
   }, [time]);
 
