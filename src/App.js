@@ -16,6 +16,8 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 1px 20px gray;
+
+  z-index: 1;
 `;
 
 const LogoStyle = styled.img`

@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled, { css } from "styled-components";
 import Timer from "./Timer";
 import { useAudio } from "../hooks/useAudio";
@@ -124,13 +124,14 @@ const Meditation = () => {
   const term = 5000;
   const [playing, setPlaying] = useAudio(sound);
 
-  const onClickPlus = () => {
+  const onClickPlus = useCallback ( () => {
     setTime(time + 1);
-  };
+  }, [time]);
 
-  const onClickMinus = () => {
+  const onClickMinus = useCallback(() => {
     setTime(time - 1);
-  };
+  }, [time]) 
+    
 
   const onClickStart = () => {
     setIsStart(true);
@@ -187,7 +188,7 @@ const Meditation = () => {
           breath(1.6, 1.1, ".ani");
           breath(1.4, 0.9, ".ani1");
           breath(1.2, 0.7, ".ani2");
-        }, 100);
+        }, 10);
       }, term)
     );
   }, [isStart]);
