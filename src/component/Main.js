@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const MainBox = styled.div`
-  padding-top: 100px;
-  /* background-color: black;
+  margin-top: 100px;
+  /* background-color: ;
   height: 500px;
   width: 100%; */
 `
