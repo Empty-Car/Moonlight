@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { MdPause, MdPlayArrow } from "react-icons/md";
+import { useAudio } from "../hooks/useAudio";
+import backgroundMusic from "../asset/audio/background_music.mp3"
+import Logo from "../asset/img/logo.svg";
 
 const HeaderBox = styled.div`
   position: fixed;
@@ -25,6 +29,21 @@ const LogoStyle = styled.img`
   height: 41px;
 `;
 
+const MusicPlayer = styled.div`
+  cursor: pointer;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  & svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+`;
+
 const NavigateButton = styled.button`
   border: none;
   outline: none;
@@ -37,7 +56,7 @@ const NavigateButton = styled.button`
   ${(props) =>
     props.isClicked &&
     css`
-      border-bottom: 3px solid #F8A6A6;
+      border-bottom: 3px solid #f8a6a6;
     `}
 `;
 
@@ -46,9 +65,13 @@ const Header = () => {
   const [meditationClicked, setMeditationClicked] = useState(false);
   const [diaryClicked, setDiaryClicked] = useState(false);
   const [centerClicked, setCenterClicked] = useState(false);
+  const [playing, setPlaying] = useAudio(backgroundMusic);
 
   const onClickMain = () => {
     navigate("/");
+    setMeditationClicked(false);
+    setDiaryClicked(false);
+    setCenterClicked(false);
   };
 
   const onClickMeditation = () => {
@@ -72,9 +95,22 @@ const Header = () => {
     setMeditationClicked(false);
   };
 
+  const onClick = () => {
+    setPlaying();
+  };
+
   return (
     <HeaderBox>
-      <LogoStyle src="img/logo.png" onClick={onClickMain}></LogoStyle>
+      <LogoStyle src={Logo} onClick={onClickMain}></LogoStyle>
+      <div>
+        <MusicPlayer onClick={onClick}>
+          {playing ? (
+            <MdPause size={50} color="#F8A6A6" />
+          ) : (
+            <MdPlayArrow size={50} color="#F8A6A6" />
+          )}
+        </MusicPlayer>
+      </div>
       <div>
         <NavigateButton
           onClick={onClickMeditation}

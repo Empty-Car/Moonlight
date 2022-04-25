@@ -3,7 +3,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import styled, { css } from "styled-components";
 import Timer from "./Timer";
 import { useAudio } from "../hooks/useAudio";
-import sound from "../breathChange.mp3";
+import sound from "../asset/audio/breathChange.mp3";
 
 const MeditationBox = styled.div`
   height: 100vh;
@@ -125,15 +125,13 @@ const Meditation = () => {
   const term = 5000;
   const [playing, setPlaying] = useAudio(sound);
 
-  const onClickPlus = useCallback ( () => {
-    
+  const onClickPlus = useCallback(() => {
     setTime(time + 1);
   }, [time]);
 
   const onClickMinus = useCallback(() => {
     setTime(time - 1);
-  }, [time]) 
-    
+  }, [time]);
 
   const onClickStart = () => {
     setIsStart(true);

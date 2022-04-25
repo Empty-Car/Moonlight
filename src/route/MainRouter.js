@@ -4,7 +4,7 @@ import {
   MainContainer,
   MeditationContainer,
   ReminisceContainer,
-  RecordEmotionContainer,
+  EmotionDiaryContainer,
 } from "../container";
 
 const MainRouter = () => {
@@ -24,7 +24,7 @@ const SubRouter = () => {
         <Route path="/meditation" element={<MeditationContainer />}></Route>
         <Route
           path="/record-emotion"
-          element={<RecordEmotionContainer />}
+          element={<EmotionDiaryContainer />}
         ></Route>
         <Route path="/reminisce" element={<ReminisceContainer />}></Route>
       </Routes>
