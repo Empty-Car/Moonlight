@@ -11,6 +11,7 @@ const MeditationBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 60px;
 `;
 
 const PlusMinusButtonBox = styled.div`
@@ -47,15 +48,13 @@ const ActiveButton = styled.button`
   margin-top: 150px;
 
   ${(props) =>
-    // props.narration &&
     props.isStart &&
     css`
       position: absolute;
       left: 50%;
       bottom: 100px;
       transform: translate(-50%, 50%);
-      /* align-items: center; */
-      /* justify-content: center; */
+
 
       & .hovered {
         display: none;
@@ -175,9 +174,9 @@ const Meditation = () => {
     if (!isStart) return;
     setTimeout(() => {
       setNarration(false);
-      breath(1.5, 1.1, ".ani");
-      // breath(1.8, 0.9, ".ani1");
-      // breath(1.6, 0.7, ".ani2");
+      breath(1.6, 1.1, ".ani");
+      breath(1.4, 0.9, ".ani1");
+      breath(1.2, 0.7, ".ani2");
     }, term);
   }, [isStart]);
 
@@ -228,11 +227,13 @@ const Meditation = () => {
                 height="300px"
               ></BreathCircle>
               <BreathCircle
+              className="ani1"
                 color="#FBC4C4"
                 width="250px"
                 height="250px"
               ></BreathCircle>
               <BreathCircle
+              className="ani2"
                 color="#F8A6A6"
                 width="200px"
                 height="200px"
