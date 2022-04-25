@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const HeaderBox = styled.div`
   position: fixed;
@@ -24,8 +25,27 @@ const LogoStyle = styled.img`
   height: 41px;
 `;
 
+const NavigateButton = styled.button`
+  border: none;
+  outline: none;
+  background-color: white;
+  font-size: 15px;
+  font-weight: bold;
+
+  margin-right: 40px;
+
+  ${(props) =>
+    props.isClicked &&
+    css`
+      border-bottom: 3px solid #F8A6A6;
+    `}
+`;
+
 const Header = () => {
   const navigate = useNavigate();
+  const [meditationClicked, setMeditationClicked] = useState(false);
+  const [diaryClicked, setDiaryClicked] = useState(false);
+  const [centerClicked, setCenterClicked] = useState(false);
 
   const onClickMain = () => {
     navigate("/");
@@ -33,27 +53,41 @@ const Header = () => {
 
   const onClickMeditation = () => {
     navigate("meditation");
-  };
-
-  const onClickReminisce = () => {
-    navigate("reminisce");
+    setMeditationClicked(true);
+    setDiaryClicked(false);
+    setCenterClicked(false);
   };
 
   const onClickRecordEmotion = () => {
     navigate("record-emotion");
+    setDiaryClicked(true);
+    setMeditationClicked(false);
+    setCenterClicked(false);
+  };
+
+  const onClickReminisce = () => {
+    navigate("reminisce");
+    setCenterClicked(true);
+    setDiaryClicked(false);
+    setMeditationClicked(false);
   };
 
   return (
     <HeaderBox>
       <LogoStyle src="img/logo.png" onClick={onClickMain}></LogoStyle>
       <div>
-        <button onClick={onClickMeditation}>명상하러 드가자~</button>
-      </div>
-      <div>
-        <button onClick={onClickRecordEmotion}>감정을 기록하러 드가자~</button>
-      </div>
-      <div>
-        <button onClick={onClickReminisce}>회상하러 드가자~</button>
+        <NavigateButton
+          onClick={onClickMeditation}
+          isClicked={meditationClicked}
+        >
+          명상
+        </NavigateButton>
+        <NavigateButton onClick={onClickRecordEmotion} isClicked={diaryClicked}>
+          감정 일기
+        </NavigateButton>
+        <NavigateButton onClick={onClickReminisce} isClicked={centerClicked}>
+          정신건강복지센터
+        </NavigateButton>
       </div>
     </HeaderBox>
   );
