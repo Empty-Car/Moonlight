@@ -4,22 +4,31 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 const Form = styled.section`
   display: flex;
   flex-direction: column;
-  width: 70vw;
+  width: 60%;
 `;
 
 const Nav = styled.section`
   display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 `;
 
 const Year = styled.div`
-  /* text-align: left; */
+  font-size: 32px;
+  font-weight: bold;
 `;
 
 const ButtonBox = styled.div`
   cursor: pointer;
 `;
 
-const Button = styled.button``;
+const TodayButton = styled.button`
+  outline: none;
+  border: none;
+  background-color: white;
+  font-size: 32px;
+  font-weight: bold;
+`;
 
 const Days = styled.div`
   display: flex;
@@ -28,6 +37,8 @@ const Days = styled.div`
 const Day = styled.div`
   width: calc(100% / 7);
   text-align: center;
+  font-size: 20px;
+  font-weight: bold;
 
   border-left: 1px solid #c4c4c4;
   border-right: 1px solid #c4c4c4;
@@ -63,9 +74,9 @@ const CalHead = ({ year, month, goToday, setMonth, setYear }) => {
           {year}년 {month}월
         </Year>
         <ButtonBox>
-          <MdKeyboardArrowLeft onClick={onPrevMonth} />
-          <Button onClick={() => goToday()}>Today</Button>
-          <MdKeyboardArrowRight onClick={onNextMonth} />
+          <MdKeyboardArrowLeft onClick={onPrevMonth} size={32} />
+          <TodayButton onClick={() => goToday()}>Today</TodayButton>
+          <MdKeyboardArrowRight onClick={onNextMonth} size={32} />
         </ButtonBox>
       </Nav>
       <Days>

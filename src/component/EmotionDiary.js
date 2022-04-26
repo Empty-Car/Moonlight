@@ -4,7 +4,11 @@ import CalBody from "./CalBody";
 import CalHead from "./CalHead";
 
 const Calendar = styled.div`
-  margin-top: 110px;
+  margin-top: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
 `;
 
 const EmotionDiary = () => {

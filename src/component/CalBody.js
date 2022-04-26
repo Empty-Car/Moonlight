@@ -4,7 +4,7 @@ import Dates from "./Dates";
 const Form = styled.div`
   display: flex;
   flex-flow: row wrap;
-  height: 70vh;
+  width: 60%;
 `;
 
 const CalBody = ({ totalDate, year, month, today }) => {
