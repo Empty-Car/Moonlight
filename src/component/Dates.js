@@ -53,7 +53,13 @@ const Dates = ({ date, month, year, isToday }) => {
       </DateBox>
 
       <div>
-        <DiaryModal isModal={isModal} closeModal={closeModal}></DiaryModal>
+        <DiaryModal
+          isModal={isModal}
+          closeModal={closeModal}
+          year={year}
+          month={month}
+          date={date}
+        ></DiaryModal>
       </div>
     </Form>
   );

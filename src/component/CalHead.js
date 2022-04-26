@@ -19,15 +19,18 @@ const Year = styled.div`
 `;
 
 const ButtonBox = styled.div`
+  display: flex;
   cursor: pointer;
+  align-items: center;
 `;
 
 const TodayButton = styled.button`
   outline: none;
   border: none;
   background-color: white;
-  font-size: 32px;
+  font-size: 20px;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 const Days = styled.div`
