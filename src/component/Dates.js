@@ -17,7 +17,7 @@ const TodayStyle = styled.div`
   background-color: #f8a6a6;
   width: 70%;
   height: 15px;
-  border-radius:5px;
+  border-radius: 5px;
 `;
 
 const DateBox = styled.div``;
@@ -26,7 +26,7 @@ const DateStyle = styled.span`
   padding: 10px 1px 1px 10px;
 `;
 
-const Dates = ({ idx, date, month, year, todayIdx }) => {
+const Dates = ({ date, month, year, isToday }) => {
   const [isModal, setIsModal] = useState(false);
 
   const openModal = () => {
@@ -42,7 +42,7 @@ const Dates = ({ idx, date, month, year, todayIdx }) => {
       <DateBox>
         <DateStyle>
           {date}
-          {idx === todayIdx ? <TodayStyle /> : null}
+          {isToday ? <TodayStyle /> : null}
           {/* {idx === todayIdx ? console.log("SUCC") : console.log("FAIL")} */}
         </DateStyle>
       </DateBox>

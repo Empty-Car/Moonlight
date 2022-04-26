@@ -9,6 +9,8 @@ const Form = styled.div`
 
 const CalBody = ({ totalDate, year, month, today }) => {
   const todayIdx = totalDate.indexOf(today);
+  const todayMonth = new Date().getMonth() + 1;
+  const todayYear = new Date().getFullYear();
 
   return (
     <Form>
@@ -16,11 +18,12 @@ const CalBody = ({ totalDate, year, month, today }) => {
         return (
           <Dates
             key={idx}
-            idx={idx}
             date={date}
             month={month}
             year={year}
-            todayIdx={todayIdx}
+            isToday={
+              todayIdx === idx && month === todayMonth && todayYear === year
+            }
           ></Dates>
         );
       })}
