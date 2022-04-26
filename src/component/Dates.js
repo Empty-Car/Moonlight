@@ -1,20 +1,32 @@
 import { useState } from "react";
 import DiaryModal from "./DiaryModal";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const Form = styled.li`
-  position: relative;
+const Form = styled.div`
   width: calc(100% / 7);
-  text-align: right;
+  padding-top: 5px;
+  text-align: left;
+
+  /* border-left: 1px solid #c4c4c4; */
+  /* border-right: 1px solid #c4c4c4; */
+  border-top: 1px solid #c4c4c4;
+  border-bottom: 1px solid #c4c4c4;
 `;
 
-const DateNum = styled.div``;
+const TodayStyle = styled.div`
+  background-color: #f8a6a6;
+  width: 70%;
+  height: 15px;
+  border-radius:5px;
+`;
 
-const TodayStyle = styled.span``;
-// const Lists = styled.div``
-// const List  =styled.span``
+const DateBox = styled.div``;
 
-const Dates = ({ lastDate, firstDate, date, findToday, month, year, idx }) => {
+const DateStyle = styled.span`
+  padding: 10px 1px 1px 10px;
+`;
+
+const Dates = ({ idx, date, month, year, todayIdx }) => {
   const [isModal, setIsModal] = useState(false);
 
   const openModal = () => {
@@ -27,14 +39,13 @@ const Dates = ({ lastDate, firstDate, date, findToday, month, year, idx }) => {
 
   return (
     <Form onDoubleClick={openModal}>
-      <DateNum
-        idx={idx}
-        lastDate={lastDate}
-        firstDate={firstDate}
-        findToday={findToday}
-      >
-        <TodayStyle findToday={findToday}>{date}</TodayStyle>
-      </DateNum>
+      <DateBox>
+        <DateStyle>
+          {date}
+          {idx === todayIdx ? <TodayStyle /> : null}
+          {/* {idx === todayIdx ? console.log("SUCC") : console.log("FAIL")} */}
+        </DateStyle>
+      </DateBox>
 
       <div>
         <DiaryModal isModal={isModal} closeModal={closeModal}></DiaryModal>

@@ -4,32 +4,38 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 const Form = styled.section`
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  border: 2px solid #e4e3e6;
-  border-radius: 2px;
+  width: 70vw;
 `;
 
-const Nav = styled.section``;
+const Nav = styled.section`
+  display: flex;
+`;
 
-const Year = styled.div``;
+const Year = styled.div`
+  /* text-align: left; */
+`;
 
-const ButtonBox = styled.div``;
-
-const Button = styled.button`
+const ButtonBox = styled.div`
   cursor: pointer;
 `;
+
+const Button = styled.button``;
 
 const Days = styled.div`
   display: flex;
 `;
 
-const Day = styled.li`
-  padding-right: 1.5vw;
+const Day = styled.div`
   width: calc(100% / 7);
-  text-align: right;
+  text-align: center;
+
+  border-left: 1px solid #c4c4c4;
+  border-right: 1px solid #c4c4c4;
+  border-top: 1px solid #c4c4c4;
+  border-bottom: 1px solid #c4c4c4;
 `;
 
-const DAY = ["일", "월", "화", "수", "목", "금", "토"];
+const DAY = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 const CalHead = ({ year, month, goToday, setMonth, setYear }) => {
   const onNextMonth = () => {

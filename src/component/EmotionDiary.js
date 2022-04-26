@@ -4,12 +4,7 @@ import CalBody from "./CalBody";
 import CalHead from "./CalHead";
 
 const Calendar = styled.div`
-  margin-top: 100px;
-
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 110px;
 `;
 
 const EmotionDiary = () => {
@@ -20,7 +15,7 @@ const EmotionDiary = () => {
   const [month, setMonth] = useState(MONTH);
   const [year, setYear] = useState(YEAR);
   const [totalDate, setTotalDate] = useState([]);
-  const [today, setToday] = useState(0);
+  const [today, setToday] = useState(new Date().getDate());
 
   const changeDate = (month) => {
     let prevMonthLastDate = new Date(YEAR, month - 1, 0).getDate();
@@ -73,9 +68,9 @@ const EmotionDiary = () => {
       ></CalHead>
       <CalBody
         totalDate={totalDate}
-        today={today}
         year={year}
         month={month}
+        today={today}
       ></CalBody>
     </Calendar>
   );

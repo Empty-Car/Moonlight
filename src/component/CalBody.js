@@ -4,14 +4,11 @@ import Dates from "./Dates";
 const Form = styled.div`
   display: flex;
   flex-flow: row wrap;
+  height: 70vh;
 `;
 
-const CalBody = ({ totalDate, today, year, month }) => {
-  const lastDate = totalDate.indexOf(1);
-  const firstDate = totalDate.indexOf(1, 7);
-
-  const findToday = totalDate.indexOf(today);
-  const getMonth = new Date().getMonth() + 1;
+const CalBody = ({ totalDate, year, month, today }) => {
+  const todayIdx = totalDate.indexOf(today);
 
   return (
     <Form>
@@ -20,12 +17,10 @@ const CalBody = ({ totalDate, today, year, month }) => {
           <Dates
             key={idx}
             idx={idx}
-            lastDate={lastDate}
-            firstDate={firstDate}
             date={date}
-            findToday={findToday === idx && month === getMonth && findToday}
             month={month}
             year={year}
+            todayIdx={todayIdx}
           ></Dates>
         );
       })}
