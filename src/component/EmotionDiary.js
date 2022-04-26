@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import CalBody from "./CalBody";
+import CalHead from "./CalHead";
 
 const Calendar = styled.div`
-  margin-top: 50px;
-  background-color: gray;
+  margin-top: 100px;
+  /* background-color: gray;
 
   width: 1120px;
   height: 800px;
@@ -11,7 +13,7 @@ const Calendar = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
 `;
 
 const EmotionDiary = () => {
@@ -22,6 +24,7 @@ const EmotionDiary = () => {
   const [month, setMonth] = useState(MONTH);
   const [year, setYear] = useState(YEAR);
   const [totalDate, setTotalDate] = useState([]);
+  const [today, setToday] = useState(0);
 
   const changeDate = (month) => {
     let prevMonthLastDate = new Date(YEAR, month - 1, 0).getDate();
@@ -54,7 +57,27 @@ const EmotionDiary = () => {
     setTotalDate(changeDate(month));
   }, [month]);
 
-  return <Calendar></Calendar>;
+  const goToToday = () => {
+    let goDate = new Date().getDate();
+    let goMonth = new Date().getMonth() + 1;
+    let goYear = new Date().getFullYear();
+    setMonth(goMonth);
+    setToday(goDate);
+    setYear(goYear);
+  };
+
+  return (
+    <Calendar>
+      <CalHead
+        year={year}
+        month={month}
+        goToday={goToToday}
+        setMonth={setMonth}
+        setYear={setYear}
+      ></CalHead>
+      <CalBody></CalBody>
+    </Calendar>
+  );
 };
 
 export default EmotionDiary;
