@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { MdPause, MdPlayArrow } from "react-icons/md";
 import { useAudio } from "../hooks/useAudio";
-import backgroundMusic from "../asset/audio/background_music.mp3"
+import backgroundMusic from "../asset/audio/background_music.mp3";
 import Logo from "../asset/img/logo.svg";
 
 const HeaderBox = styled.div`
@@ -27,6 +27,7 @@ const HeaderBox = styled.div`
 const LogoStyle = styled.img`
   width: 109px;
   height: 41px;
+  cursor: pointer;
 `;
 
 const MusicPlayer = styled.div`
@@ -45,6 +46,7 @@ const MusicPlayer = styled.div`
 `;
 
 const NavigateButton = styled.button`
+  cursor: pointer;
   border: none;
   outline: none;
   background-color: white;

@@ -1,7 +1,13 @@
 import styled from "styled-components";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
-const Form = styled.section``;
+const Form = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  border: 2px solid #e4e3e6;
+  border-radius: 2px;
+`;
 
 const Nav = styled.section``;
 
@@ -9,11 +15,19 @@ const Year = styled.div``;
 
 const ButtonBox = styled.div``;
 
-const Button = styled.button``;
+const Button = styled.button`
+  cursor: pointer;
+`;
 
-const Days = styled.div``;
+const Days = styled.div`
+  display: flex;
+`;
 
-const Day = styled.div``;
+const Day = styled.li`
+  padding-right: 1.5vw;
+  width: calc(100% / 7);
+  text-align: right;
+`;
 
 const DAY = ["일", "월", "화", "수", "목", "금", "토"];
 

@@ -5,15 +5,11 @@ import CalHead from "./CalHead";
 
 const Calendar = styled.div`
   margin-top: 100px;
-  /* background-color: gray;
-
-  width: 1120px;
-  height: 800px;
 
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%); */
+  transform: translate(-50%, -50%);
 `;
 
 const EmotionDiary = () => {
@@ -75,7 +71,12 @@ const EmotionDiary = () => {
         setMonth={setMonth}
         setYear={setYear}
       ></CalHead>
-      <CalBody></CalBody>
+      <CalBody
+        totalDate={totalDate}
+        today={today}
+        year={year}
+        month={month}
+      ></CalBody>
     </Calendar>
   );
 };
