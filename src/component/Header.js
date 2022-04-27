@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { useState } from "react";
 import { MdPause, MdPlayArrow } from "react-icons/md";
 import { useAudio } from "../hooks/useAudio";
@@ -54,48 +54,10 @@ const NavigateButton = styled.button`
   font-weight: bold;
 
   margin-right: 40px;
-
-  ${(props) =>
-    props.isClicked &&
-    css`
-      border-bottom: 3px solid #f8a6a6;
-    `}
 `;
 
 const Header = () => {
-  const navigate = useNavigate();
-  const [meditationClicked, setMeditationClicked] = useState(false);
-  const [diaryClicked, setDiaryClicked] = useState(false);
-  const [centerClicked, setCenterClicked] = useState(false);
   const [playing, setPlaying] = useAudio(backgroundMusic);
-
-  const onClickMain = () => {
-    navigate("/");
-    setMeditationClicked(false);
-    setDiaryClicked(false);
-    setCenterClicked(false);
-  };
-
-  const onClickMeditation = () => {
-    navigate("meditation");
-    setMeditationClicked(true);
-    setDiaryClicked(false);
-    setCenterClicked(false);
-  };
-
-  const onClickRecordEmotion = () => {
-    navigate("record-emotion");
-    setDiaryClicked(true);
-    setMeditationClicked(false);
-    setCenterClicked(false);
-  };
-
-  const onClickReminisce = () => {
-    navigate("reminisce");
-    setCenterClicked(true);
-    setDiaryClicked(false);
-    setMeditationClicked(false);
-  };
 
   const onClick = () => {
     setPlaying();
@@ -103,7 +65,9 @@ const Header = () => {
 
   return (
     <HeaderBox>
-      <LogoStyle src={Logo} onClick={onClickMain}></LogoStyle>
+      <NavLink to="main">
+        <LogoStyle src={Logo}></LogoStyle>
+      </NavLink>
       <div>
         <MusicPlayer onClick={onClick}>
           {playing ? (
@@ -114,18 +78,30 @@ const Header = () => {
         </MusicPlayer>
       </div>
       <div>
-        <NavigateButton
-          onClick={onClickMeditation}
-          isClicked={meditationClicked}
+        <NavLink
+          to="meditation"
+          activestyle={{
+            borderBottom: "3px solid #f8a6a6",
+          }}
         >
-          명상
-        </NavigateButton>
-        <NavigateButton onClick={onClickRecordEmotion} isClicked={diaryClicked}>
-          감정 일기
-        </NavigateButton>
-        <NavigateButton onClick={onClickReminisce} isClicked={centerClicked}>
-          정신건강복지센터
-        </NavigateButton>
+          <NavigateButton>명상</NavigateButton>
+        </NavLink>
+        <NavLink
+          to="record-emotion"
+          activeStyle={{
+            borderBottom: "3px solid #f8a6a6",
+          }}
+        >
+          <NavigateButton>감정 일기</NavigateButton>
+        </NavLink>
+        <NavLink
+          to="reminisce"
+          activestyle={{
+            borderBottom: "3px solid #f8a6a6",
+          }}
+        >
+          <NavigateButton>정신건강복지센터</NavigateButton>
+        </NavLink>
       </div>
     </HeaderBox>
   );

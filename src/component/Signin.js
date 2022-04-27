@@ -35,6 +35,10 @@ const Signin = () => {
       password: password,
     });
 
+    // if (res.status !== 200) {
+    //   alert("응 id: d / 비번: ddd");
+    // }
+
     navigate("main");
 
     const resData = res.data;
