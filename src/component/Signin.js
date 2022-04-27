@@ -35,7 +35,7 @@ const Signin = () => {
       password: password,
     });
 
-    navigate("todo-list");
+    navigate("main");
 
     const resData = res.data;
     setUserId(resData.user_id);

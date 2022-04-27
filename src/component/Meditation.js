@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import Timer from "./Timer";
 import { useAudio } from "../hooks/useAudio";
 import sound from "../asset/audio/breathChange.mp3";
+import { useNavigate } from "react-router-dom";
 
 const MeditationBox = styled.div`
   height: 100vh;
@@ -124,6 +125,15 @@ const Meditation = () => {
 
   const term = 5000;
   const [playing, setPlaying] = useAudio(sound);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token == null) {
+      navigate("/");
+    }
+  }, []);
 
   const onClickPlus = useCallback(() => {
     setTime(time + 1);

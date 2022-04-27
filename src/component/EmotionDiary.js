@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CalBody from "./CalBody";
 import CalHead from "./CalHead";
+import { useNavigate } from "react-router-dom";
 
 const Calendar = styled.div`
   margin-top: 150px;
@@ -23,6 +24,15 @@ const EmotionDiary = () => {
 
   const [lenPrevMonth, setLenPrevMonth] = useState(0);
   const [lenThisMonth, setLenThisMonth] = useState(0);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token == null) {
+      navigate("/");
+    }
+  }, []);
 
   const changeDate = (month) => {
     let prevMonthLastDate = new Date(YEAR, month - 1, 0).getDate();
