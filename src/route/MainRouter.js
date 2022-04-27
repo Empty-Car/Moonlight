@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "../component/Header";
 import {
   MainContainer,
+  SigninContainer,
   MeditationContainer,
   ReminisceContainer,
   EmotionDiaryContainer,
@@ -20,7 +21,8 @@ const SubRouter = () => {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<MainContainer />}></Route>
+        <Route path="/" element={<SigninContainer />}></Route>
+        <Route path="/main" element={<MainContainer />}></Route>
         <Route path="/meditation" element={<MeditationContainer />}></Route>
         <Route
           path="/record-emotion"
