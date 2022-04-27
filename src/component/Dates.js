@@ -26,10 +26,9 @@ const TodayStyle = styled.div`
   margin-left: 7px;
 `;
 
-const DateBox = styled.div``;
-
 const DateStyle = styled.span`
   padding: 10px 1px 1px 10px;
+  font-weight: bold;
 
   ${(props) =>
     props.isPrev &&
@@ -57,19 +56,19 @@ const Dates = ({ idx, date, month, year, isToday, isPrev, isNext }) => {
 
   return (
     <Form onDoubleClick={openModal}>
-      <DateBox>
+      <div>
         <DateStyle isPrev={isPrev} isNext={isNext}>
           {date}
           {isToday ? <TodayStyle /> : null}
         </DateStyle>
-      </DateBox>
+      </div>
 
       <div>
         <DiaryModal
           isModal={isModal}
           closeModal={closeModal}
           year={year}
-          month={month}
+          month={isPrev ? month - 1 : month || isNext ? month + 1 : month}
           date={date}
         ></DiaryModal>
       </div>
