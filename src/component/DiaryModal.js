@@ -83,7 +83,12 @@ const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
               </div>
               <SelectMood>
                 <div>오늘의 기분은 어떤 색이었나요? :</div>
-                {isMoods ? null : (
+                {isMoods ? (
+                  <div>
+                    여기에 색깔 선택하는게 들어가야해요 그리고 그거 눌렀을 떄
+                    기본이 여거로 바뀌도록.
+                  </div>
+                ) : (
                   <MoodButton
                     onClick={() => {
                       setIsMoods(true);

@@ -68,7 +68,7 @@ const Dates = ({ idx, date, month, year, isToday, isPrev, isNext }) => {
           isModal={isModal}
           closeModal={closeModal}
           year={year}
-          month={isPrev ? month - 1 : month || isNext ? month + 1 : month}
+          month={isPrev ? month - 1 : month && isNext ? month + 1 : month}
           date={date}
         ></DiaryModal>
       </div>
