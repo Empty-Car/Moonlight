@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DiaryModal from "./DiaryModal";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Form = styled.div`
   width: calc(100% / 7);
@@ -30,9 +30,21 @@ const DateBox = styled.div``;
 
 const DateStyle = styled.span`
   padding: 10px 1px 1px 10px;
+
+  ${(props) =>
+    props.isPrev &&
+    css`
+      color: #c4c4c4;
+    `}
+
+  ${(props) =>
+    props.isNext &&
+    css`
+      color: #c4c4c4;
+    `}
 `;
 
-const Dates = ({ date, month, year, isToday }) => {
+const Dates = ({ idx, date, month, year, isToday, isPrev, isNext }) => {
   const [isModal, setIsModal] = useState(false);
 
   const openModal = () => {
@@ -46,7 +58,7 @@ const Dates = ({ date, month, year, isToday }) => {
   return (
     <Form onDoubleClick={openModal}>
       <DateBox>
-        <DateStyle>
+        <DateStyle isPrev={isPrev} isNext={isNext}>
           {date}
           {isToday ? <TodayStyle /> : null}
         </DateStyle>

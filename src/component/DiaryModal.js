@@ -83,12 +83,13 @@ const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
               </div>
               <SelectMood>
                 <div>오늘의 기분은 어떤 색이었나요? :</div>
-                
-                <MoodButton
-                  onClick={() => {
-                    setIsMoods(true);
-                  }}
-                ></MoodButton>
+                {isMoods ? null : (
+                  <MoodButton
+                    onClick={() => {
+                      setIsMoods(true);
+                    }}
+                  ></MoodButton>
+                )}
               </SelectMood>
             </TextBox>
           </ModalContainer>

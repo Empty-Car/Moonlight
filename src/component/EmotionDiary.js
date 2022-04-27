@@ -8,7 +8,7 @@ const Calendar = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction:column;
+  flex-direction: column;
 `;
 
 const EmotionDiary = () => {
@@ -20,6 +20,9 @@ const EmotionDiary = () => {
   const [year, setYear] = useState(YEAR);
   const [totalDate, setTotalDate] = useState([]);
   const [today, setToday] = useState(new Date().getDate());
+
+  const [lenPrevMonth, setLenPrevMonth] = useState(0);
+  const [lenThisMonth, setLenThisMonth] = useState(0);
 
   const changeDate = (month) => {
     let prevMonthLastDate = new Date(YEAR, month - 1, 0).getDate();
@@ -44,6 +47,9 @@ const EmotionDiary = () => {
 
     let thisMonthDateArr = [];
     thisMonthDateArr = [...Array(thisMonthLastDate + 1).keys()].slice(1);
+
+    setLenPrevMonth(prevMonthDateArr.length);
+    setLenThisMonth(thisMonthDateArr.length);
 
     return prevMonthDateArr.concat(thisMonthDateArr, nextMonthDateArr);
   };
@@ -75,6 +81,8 @@ const EmotionDiary = () => {
         year={year}
         month={month}
         today={today}
+        prevLength={lenPrevMonth}
+        thisLength={lenThisMonth}
       ></CalBody>
     </Calendar>
   );

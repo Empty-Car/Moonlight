@@ -7,10 +7,17 @@ const Form = styled.div`
   width: 60%;
 `;
 
-const CalBody = ({ totalDate, year, month, today }) => {
-  const todayIdx = totalDate.indexOf(today);
+const CalBody = ({ totalDate, year, month, today, prevLength, thisLength }) => {
   const todayMonth = new Date().getMonth() + 1;
   const todayYear = new Date().getFullYear();
+
+  const copyTotalDate = [...totalDate];
+  for (let i = 0; i < prevLength; i++) {
+    copyTotalDate.shift();
+  }
+
+  const todayIdx = copyTotalDate.indexOf(today) + prevLength;
+  const nextMonthIdx = prevLength + thisLength;
 
   return (
     <Form>
@@ -18,12 +25,18 @@ const CalBody = ({ totalDate, year, month, today }) => {
         return (
           <Dates
             key={idx}
+            idx={idx}
             date={date}
             month={month}
             year={year}
             isToday={
-              todayIdx === idx && month === todayMonth && todayYear === year
+              todayIdx === idx &&
+              todayMonth === month &&
+              todayYear === year &&
+              todayIdx > prevLength
             }
+            isPrev={idx < prevLength}
+            isNext={idx >= nextMonthIdx}
           ></Dates>
         );
       })}
