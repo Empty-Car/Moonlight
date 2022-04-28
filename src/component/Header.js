@@ -94,7 +94,7 @@ const Header = () => {
           <NavigateButton>감정 일기</NavigateButton>
         </NavLink>
         <NavLink
-          to="reminisce"
+          to="centers"
           activestyle={{
             borderBottom: "3px solid #f8a6a6",
           }}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import { Instance } from "../axios";
 
@@ -85,6 +85,15 @@ const DiaryInput = styled.input`
   resize: none;
   border: none;
   height: 60px;
+`;
+
+const saveButton = styled.button`
+  cursor: pointer;
+  outline: none;
+  border: none;
+
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const dateToString = (date) => {
@@ -223,7 +232,7 @@ const DiaryModal = ({ isModal, closeModal, year, month, date, nameData }) => {
                 ></DiaryInput>
               </div>
             </TextBox>
-            <button onClick={onDiarySave}>Submit</button>
+            <saveButton onClick={onDiarySave}>저장하기</saveButton>
           </ModalContainer>
         </Background>
       ) : null}
