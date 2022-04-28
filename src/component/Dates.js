@@ -64,7 +64,6 @@ const Dates = ({ date, month, year, isToday, isPrev, isNext }) => {
     const res = await Instance.get(
       `/v1/todo/${dateToString(`${year}-${month}-${date}`)}/user/${userId}`
     );
-    console.log(res.data);
 
     const resData = res.data;
     if (resData.length === 0) {

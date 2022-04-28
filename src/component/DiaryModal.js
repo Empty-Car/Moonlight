@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { MdClose } from "react-icons/md";
 import { Instance } from "../axios";
 
@@ -65,14 +65,18 @@ const MoodButton = styled.button`
   outline: none;
 `;
 
+const Bounding = styled.div`
+  height: 35px;
+  width: 3px;
+  background-color: black;
+
+  margin-left: 20px;
+`;
+
 const MoodSelectBox = styled.div`
   height: 30px;
   width: 50px;
   display: flex;
-`;
-
-const DiaryBox = styled.div`
-  /* overflow-y: auto; */
 `;
 
 const DiaryInput = styled.input`
@@ -156,9 +160,13 @@ const DiaryModal = ({ isModal, closeModal, year, month, date, nameData }) => {
                     setIsMoods(true);
                   }}
                   backgroundColor={colorMood}
+                  selectedMood={true}
                 ></MoodButton>
                 {isMoods && (
                   <MoodSelectBox>
+                    <div>
+                      <Bounding />
+                    </div>
                     <MoodButton
                       onClick={onMoodChange}
                       backgroundColor="black"
@@ -204,7 +212,7 @@ const DiaryModal = ({ isModal, closeModal, year, month, date, nameData }) => {
                   </MoodSelectBox>
                 )}
               </SelectMood>
-              <DiaryBox>
+              <div>
                 <DiaryInput
                   placeholder="오늘 하루를 정리해봐요"
                   onChange={(e) => {
@@ -213,7 +221,7 @@ const DiaryModal = ({ isModal, closeModal, year, month, date, nameData }) => {
                   name="diary"
                   value={name.diary}
                 ></DiaryInput>
-              </DiaryBox>
+              </div>
             </TextBox>
             <button onClick={onDiarySave}>Submit</button>
           </ModalContainer>
