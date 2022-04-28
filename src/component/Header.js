@@ -79,7 +79,7 @@ const Header = () => {
       <div>
         <NavLink
           to="meditation"
-          activeStyle={{
+          activestyle={{
             borderBottom: "3px solid #f8a6a6",
           }}
         >

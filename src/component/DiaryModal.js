@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import { Instance } from "../axios";
@@ -72,28 +72,55 @@ const MoodSelectBox = styled.div`
 `;
 
 const DiaryBox = styled.div`
-  width: 80%;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 `;
+
+const DiaryInput = styled.input`
+  outline: none;
+  width: 80%;
+  resize: none;
+  border: none;
+  height: 60px;
+`;
+
+const dateToString = (date) => {
+  const d = new Date(date);
+
+  return `${d.getFullYear()}-${(d.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
+};
 
 const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
   const [isMoods, setIsMoods] = useState(false);
   const [mood, setMood] = useState("gray");
 
+  const [name, setName] = useState({
+    title: "",
+    mood: "",
+    diary: "",
+  });
+
   const modalClose = () => {
     closeModal();
   };
 
-  const onMoodChange = (color) => {
+  const onMoodChange = (e) => {
+    const color = e.target.name;
     setMood(color);
     setIsMoods(false);
+    setName({ ...name, mood: color });
   };
 
   const onDiarySave = async () => {
+    console.log(typeof JSON.stringify(name));
+    console.log(dateToString(`${year}-${month}-${date}`));
     const res = await Instance.post("/v1/todo", {
-      name: "",
-      date: "",
+      name: JSON.stringify(name),
+      date: dateToString(`${year}-${month}-${date}`),
     });
+
+    console.log(res);
   };
 
   return (
@@ -106,7 +133,13 @@ const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
             </CloseButton>
             <TextBox>
               <div>
-                <TitleInput placeholder="제목 입력"></TitleInput>
+                <TitleInput
+                  placeholder="제목 입력"
+                  onChange={(e) => {
+                    setName({ ...name, [e.target.name]: e.target.value });
+                  }}
+                  name="title"
+                ></TitleInput>
               </div>
               <div>
                 <DisplayDate>
@@ -117,7 +150,7 @@ const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
                 <div>오늘의 기분은 어떤 색이었나요? :</div>
 
                 <MoodButton
-                  onClick={(e) => {
+                  onClick={() => {
                     setIsMoods(true);
                   }}
                   backgroundColor={mood}
@@ -125,47 +158,58 @@ const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
                 {isMoods && (
                   <MoodSelectBox>
                     <MoodButton
-                      onClick={() => onMoodChange("black")}
+                      onClick={onMoodChange}
                       backgroundColor="black"
+                      name="black"
                     >
                       선택안함
                     </MoodButton>
                     <MoodButton
-                      onClick={() => onMoodChange("#BDBDBD")}
+                      onClick={onMoodChange}
                       backgroundColor="#BDBDBD"
+                      name="#BDBDBD"
                     >
                       최악
                     </MoodButton>
                     <MoodButton
-                      onClick={() => onMoodChange("#D3CCA4")}
+                      onClick={onMoodChange}
                       backgroundColor="#D3CCA4"
+                      name="#D3CCA4"
                     >
                       별로
                     </MoodButton>
                     <MoodButton
-                      onClick={() => onMoodChange("#FDD692")}
+                      onClick={onMoodChange}
                       backgroundColor="#FDD692"
+                      name="#FDD692"
                     >
                       보통
                     </MoodButton>
                     <MoodButton
-                      onClick={() => onMoodChange("#F8A6A6")}
+                      onClick={onMoodChange}
                       backgroundColor="#F8A6A6"
+                      name="#F8A6A6"
                     >
                       좋음
                     </MoodButton>
                     <MoodButton
-                      onClick={() => onMoodChange("#FF7473")}
+                      onClick={onMoodChange}
                       backgroundColor="#FF7473"
+                      name="#FF7473"
                     >
                       최고
                     </MoodButton>
-                    {/* <div>dddddddddddddddddddddd</div> */}
                   </MoodSelectBox>
                 )}
               </SelectMood>
               <DiaryBox>
-                <input placeholder="오늘 하루를 정리해봐요"></input>
+                <DiaryInput
+                  placeholder="오늘 하루를 정리해봐요"
+                  onChange={(e) => {
+                    setName({ ...name, [e.target.name]: e.target.value });
+                  }}
+                  name="diary"
+                ></DiaryInput>
               </DiaryBox>
             </TextBox>
             <button onClick={onDiarySave}>Submit</button>
