@@ -1,6 +1,7 @@
-import { useState } from "react";
-import styled, { css } from "styled-components";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
 import { MdClose } from "react-icons/md";
+import { Instance } from "../axios";
 
 const Background = styled.div`
   position: absolute;
@@ -54,15 +55,46 @@ const SelectMood = styled.div`
   display: flex;
 `;
 
-const MoodButton = styled.div`
+const MoodButton = styled.button`
   margin-left: 20px;
-  width: 20px;
-  height: 20px;
-  border: 2px solid black;
+  height: 30px;
+  width: 30px;
+  background-color: ${(props) => props.backgroundColor};
+
+  border: none;
+  outline: none;
+`;
+
+const MoodSelectBox = styled.div`
+  height: 30px;
+  width: 50px;
+  display: flex;
+`;
+
+const DiaryBox = styled.div`
+  width: 80%;
+  overflow-y: auto;
 `;
 
 const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
   const [isMoods, setIsMoods] = useState(false);
+  const [mood, setMood] = useState("gray");
+
+  const modalClose = () => {
+    closeModal();
+  };
+
+  const onMoodChange = (color) => {
+    setMood(color);
+    setIsMoods(false);
+  };
+
+  const onDiarySave = async () => {
+    const res = await Instance.post("/v1/todo", {
+      name: "",
+      date: "",
+    });
+  };
 
   return (
     <div>
@@ -70,7 +102,7 @@ const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
         <Background>
           <ModalContainer>
             <CloseButton>
-              <MdClose onClick={closeModal} size={35}></MdClose>
+              <MdClose onClick={modalClose} size={35}></MdClose>
             </CloseButton>
             <TextBox>
               <div>
@@ -83,20 +115,60 @@ const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
               </div>
               <SelectMood>
                 <div>오늘의 기분은 어떤 색이었나요? :</div>
-                {isMoods ? (
-                  <div>
-                    여기에 색깔 선택하는게 들어가야해요 그리고 그거 눌렀을 떄
-                    기본이 여거로 바뀌도록.
-                  </div>
-                ) : (
-                  <MoodButton
-                    onClick={() => {
-                      setIsMoods(true);
-                    }}
-                  ></MoodButton>
+
+                <MoodButton
+                  onClick={(e) => {
+                    setIsMoods(true);
+                  }}
+                  backgroundColor={mood}
+                ></MoodButton>
+                {isMoods && (
+                  <MoodSelectBox>
+                    <MoodButton
+                      onClick={() => onMoodChange("black")}
+                      backgroundColor="black"
+                    >
+                      선택안함
+                    </MoodButton>
+                    <MoodButton
+                      onClick={() => onMoodChange("#BDBDBD")}
+                      backgroundColor="#BDBDBD"
+                    >
+                      최악
+                    </MoodButton>
+                    <MoodButton
+                      onClick={() => onMoodChange("#D3CCA4")}
+                      backgroundColor="#D3CCA4"
+                    >
+                      별로
+                    </MoodButton>
+                    <MoodButton
+                      onClick={() => onMoodChange("#FDD692")}
+                      backgroundColor="#FDD692"
+                    >
+                      보통
+                    </MoodButton>
+                    <MoodButton
+                      onClick={() => onMoodChange("#F8A6A6")}
+                      backgroundColor="#F8A6A6"
+                    >
+                      좋음
+                    </MoodButton>
+                    <MoodButton
+                      onClick={() => onMoodChange("#FF7473")}
+                      backgroundColor="#FF7473"
+                    >
+                      최고
+                    </MoodButton>
+                    {/* <div>dddddddddddddddddddddd</div> */}
+                  </MoodSelectBox>
                 )}
               </SelectMood>
+              <DiaryBox>
+                <input placeholder="오늘 하루를 정리해봐요"></input>
+              </DiaryBox>
             </TextBox>
+            <button onClick={onDiarySave}>Submit</button>
           </ModalContainer>
         </Background>
       ) : null}

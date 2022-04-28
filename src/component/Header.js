@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
-import { useNavigate, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { MdPause, MdPlayArrow } from "react-icons/md";
 import { useAudio } from "../hooks/useAudio";
 import backgroundMusic from "../asset/audio/background_music.mp3";
@@ -80,7 +79,7 @@ const Header = () => {
       <div>
         <NavLink
           to="meditation"
-          activestyle={{
+          activeStyle={{
             borderBottom: "3px solid #f8a6a6",
           }}
         >
@@ -88,7 +87,7 @@ const Header = () => {
         </NavLink>
         <NavLink
           to="record-emotion"
-          activeStyle={{
+          activestyle={{
             borderBottom: "3px solid #f8a6a6",
           }}
         >
