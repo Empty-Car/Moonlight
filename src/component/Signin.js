@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { NonTokenInstance } from "../axios";
 import SignupModal from "./SignupModal";
 import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { userIdState } from "../recoil";
 
 const SignupDiv = styled.div`
   margin-top: 200px;
@@ -22,7 +20,6 @@ const Signin = () => {
   const { email, password } = inputs;
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
-  const setUserId = useSetRecoilState(userIdState);
 
   const onSetHandler = (e) => {
     const name = e.target.name;
@@ -42,8 +39,8 @@ const Signin = () => {
     navigate("main");
 
     const resData = res.data;
-    setUserId(resData.user_id);
     localStorage.setItem("token", resData.token);
+    localStorage.setItem("user_id", resData.user_id);
   };
 
   const openModal = () => {

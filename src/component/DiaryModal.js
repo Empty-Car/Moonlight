@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import { Instance } from "../axios";
@@ -83,7 +83,7 @@ const DiaryInput = styled.input`
   height: 60px;
 `;
 
-const dateToString = (date) => {
+export const dateToString = (date) => {
   const d = new Date(date);
 
   return `${d.getFullYear()}-${(d.getMonth() + 1)
@@ -91,36 +91,37 @@ const dateToString = (date) => {
     .padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
 };
 
-const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
+const DiaryModal = ({ isModal, closeModal, year, month, date, nameData }) => {
   const [isMoods, setIsMoods] = useState(false);
-  const [mood, setMood] = useState("gray");
+  const { title, mood, diary } = nameData || { title: "", mood: "", diary: "" };
+  const [colorMood, setColorMood] = useState("gray");
 
   const [name, setName] = useState({
-    title: "",
-    mood: "",
-    diary: "",
+    title: title,
+    mood: mood,
+    diary: diary,
   });
 
-  const modalClose = () => {
-    closeModal();
-  };
+  useEffect(() => {
+    setName({
+      mood: nameData.mood,
+      title: nameData.title,
+      diary: nameData.diary,
+    });
+  }, [nameData]);
 
   const onMoodChange = (e) => {
     const color = e.target.name;
-    setMood(color);
+    setColorMood(color);
     setIsMoods(false);
     setName({ ...name, mood: color });
   };
 
   const onDiarySave = async () => {
-    console.log(typeof JSON.stringify(name));
-    console.log(dateToString(`${year}-${month}-${date}`));
     const res = await Instance.post("/v1/todo", {
       name: JSON.stringify(name),
       date: dateToString(`${year}-${month}-${date}`),
     });
-
-    console.log(res);
   };
 
   return (
@@ -129,7 +130,7 @@ const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
         <Background>
           <ModalContainer>
             <CloseButton>
-              <MdClose onClick={modalClose} size={35}></MdClose>
+              <MdClose onClick={closeModal} size={35}></MdClose>
             </CloseButton>
             <TextBox>
               <div>
@@ -139,6 +140,7 @@ const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
                     setName({ ...name, [e.target.name]: e.target.value });
                   }}
                   name="title"
+                  value={name.title}
                 ></TitleInput>
               </div>
               <div>
@@ -153,7 +155,7 @@ const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
                   onClick={() => {
                     setIsMoods(true);
                   }}
-                  backgroundColor={mood}
+                  backgroundColor={colorMood}
                 ></MoodButton>
                 {isMoods && (
                   <MoodSelectBox>
@@ -209,6 +211,7 @@ const DiaryModal = ({ isModal, closeModal, year, month, date }) => {
                     setName({ ...name, [e.target.name]: e.target.value });
                   }}
                   name="diary"
+                  value={name.diary}
                 ></DiaryInput>
               </DiaryBox>
             </TextBox>

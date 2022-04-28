@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import DiaryModal from "./DiaryModal";
 import styled, { css } from "styled-components";
+import { Instance } from "../axios";
+import { dateToString } from "./DiaryModal";
 
 const Form = styled.div`
   width: calc(100% / 7);
@@ -43,8 +45,9 @@ const DateStyle = styled.span`
     `}
 `;
 
-const Dates = ({ idx, date, month, year, isToday, isPrev, isNext }) => {
+const Dates = ({ date, month, year, isToday, isPrev, isNext }) => {
   const [isModal, setIsModal] = useState(false);
+  const [nameData, setNameData] = useState("");
 
   const openModal = () => {
     setIsModal(true);
@@ -54,8 +57,24 @@ const Dates = ({ idx, date, month, year, isToday, isPrev, isNext }) => {
     setIsModal(false);
   };
 
+  const onLoadDiary = async () => {
+    openModal();
+
+    const userId = localStorage.getItem("user_id");
+    const res = await Instance.get(
+      `/v1/todo/${dateToString(`${year}-${month}-${date}`)}/user/${userId}`
+    );
+    console.log(res.data);
+
+    const resData = res.data;
+    if (resData.length === 0) {
+      return;
+    }
+    setNameData(JSON.parse(resData[resData.length - 1].name));
+  };
+
   return (
-    <Form onDoubleClick={openModal}>
+    <Form onDoubleClick={onLoadDiary}>
       <div>
         <DateStyle isPrev={isPrev} isNext={isNext}>
           {date}
@@ -70,7 +89,8 @@ const Dates = ({ idx, date, month, year, isToday, isPrev, isNext }) => {
           year={year}
           month={isPrev ? month - 1 : month && isNext ? month + 1 : month}
           date={date}
-        ></DiaryModal>
+          nameData={nameData}
+        />
       </div>
     </Form>
   );

@@ -25,7 +25,6 @@ const CalBody = ({ totalDate, year, month, today, prevLength, thisLength }) => {
         return (
           <Dates
             key={idx}
-            idx={idx}
             date={date}
             month={month}
             year={year}
