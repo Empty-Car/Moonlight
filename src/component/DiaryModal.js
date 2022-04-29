@@ -87,7 +87,7 @@ const DiaryInput = styled.input`
   height: 60px;
 `;
 
-const saveButton = styled.button`
+const SaveButton = styled.button`
   cursor: pointer;
   outline: none;
   border: none;
@@ -232,7 +232,7 @@ const DiaryModal = ({ isModal, closeModal, year, month, date, nameData }) => {
                 ></DiaryInput>
               </div>
             </TextBox>
-            <saveButton onClick={onDiarySave}>저장하기</saveButton>
+            <SaveButton onClick={onDiarySave}>저장하기</SaveButton>
           </ModalContainer>
         </Background>
       ) : null}

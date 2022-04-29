@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Daejeon } from "../constant";
+import Center from "./Center";
 
 const CentersBox = styled.div`
   position: absolute;
@@ -9,15 +10,12 @@ const CentersBox = styled.div`
   bottom: 50%;
   transform: translate(-50%, 50%);
 
-  width: 1000px;
+  width: 90%;
 `;
 
-const EachCenter = styled.div`
-  display: flex;
-  justify-content: space-around;
-`;
+const EachCenter = styled.div``;
 
-const Centers = () => {
+const CentersList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,13 +28,17 @@ const Centers = () => {
   return (
     <CentersBox>
       <EachCenter>
-        {Object.keys(Daejeon).map((key, idx) => {
-          <div>{Daejeon[key]} | {Daejeon[key]}</div>
-          
-        }}
+        {Daejeon.map((info, idx) => (
+          <Center
+            key={idx}
+            centerName={info.centerName}
+            location={info.location}
+            phonecall={info.phonecall}
+          ></Center>
+        ))}
       </EachCenter>
     </CentersBox>
   );
 };
 
-export default Centers;
+export default CentersList;
