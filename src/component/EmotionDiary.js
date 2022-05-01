@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import CalBody from "./CalBody";
 import CalHead from "./CalHead";
@@ -68,14 +68,14 @@ const EmotionDiary = () => {
     setTotalDate(changeDate(month));
   }, [month]);
 
-  const goToToday = () => {
+  const goToToday = useCallback(() => {
     let goDate = new Date().getDate();
     let goMonth = new Date().getMonth() + 1;
     let goYear = new Date().getFullYear();
-    setMonth(goMonth);
     setToday(goDate);
+    setMonth(goMonth);
     setYear(goYear);
-  };
+  }, []);
 
   return (
     <Calendar>

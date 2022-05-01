@@ -143,7 +143,7 @@ const Meditation = () => {
     setTime(time - 1);
   }, [time]);
 
-  const onClickStart = () => {
+  const onClickStart = useCallback(() => {
     setIsStart(true);
 
     setMeditationTimeout(
@@ -151,15 +151,15 @@ const Meditation = () => {
         onClickStop();
       }, minuteToMillisec(time) + term + 3000)
     );
-  };
+  }, [time]);
 
-  const onClickStop = () => {
+  const onClickStop = useCallback(() => {
     setIsStart(false);
     gsap.killTweensOf("*");
     setNarration(true);
     clearTimeout(narrationTimeout);
     clearTimeout(meditationTimeout);
-  };
+  }, [narrationTimeout, meditationTimeout]);
 
   const breath = (max, min, name) => {
     const intro = () => {
