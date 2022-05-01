@@ -5,12 +5,45 @@ import SignupModal from "./SignupModal";
 import { useNavigate } from "react-router-dom";
 
 const SignupDiv = styled.div`
-  margin-top: 200px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `;
-const EmailInput = styled.input``;
-const PasswordInput = styled.input``;
-const ActiveButton = styled.button``;
-const SignupButton = styled.button``;
+const InputStyle = styled.input`
+  padding: 12px;
+  border: 2px solid #f8a6a6;
+  width: 500px;
+  font-size: 18px;
+  box-sizing: border-box;
+
+  margin-top: 10px;
+`;
+
+const ActiveButton = styled.button`
+  width: 100px;
+  height: 50px;
+  margin-top: 50px;
+  border: none;
+  background-color: #f8a6a6;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+`;
+
+const SignupButton = styled.button`
+  width: 120px;
+  height: 50px;
+  margin-top: 50px;
+  margin-left: 30px;
+  border: none;
+  background-color: #f8a6a6;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+`;
 
 const Signin = () => {
   const [inputs, setInputs] = useState({
@@ -32,10 +65,6 @@ const Signin = () => {
       password: password,
     });
 
-    // if (res.status !== 200) {
-    //   alert("응 id: d / 비번: ddd");
-    // }
-
     navigate("main");
 
     const resData = res.data;
@@ -53,29 +82,25 @@ const Signin = () => {
   return (
     <SignupDiv>
       <div>
-        Email
-        <EmailInput
+        <InputStyle
           value={email}
           name="email"
           onChange={onSetHandler}
-        ></EmailInput>
+          placeholder="이메일 입력:)"
+        ></InputStyle>
       </div>
       <div>
-        Password
-        <PasswordInput
+        <InputStyle
           value={password}
           type="password"
           name="password"
+          placeholder="비밀번호 입력^^"
           onChange={onSetHandler}
-        ></PasswordInput>
+        ></InputStyle>
       </div>
-      <div>
-        <ActiveButton onClick={activeButtonClick}>로그인완료</ActiveButton>
-      </div>
-      <div>
-        <SignupButton onClick={openModal}>회원가입하러가기</SignupButton>
-        <SignupModal isModal={isModal} closeModal={closeModal}></SignupModal>
-      </div>
+      <ActiveButton onClick={activeButtonClick}>로그인완료</ActiveButton>
+      <SignupButton onClick={openModal}>회원가입하러가기</SignupButton>
+      <SignupModal isModal={isModal} closeModal={closeModal}></SignupModal>
     </SignupDiv>
   );
 };
