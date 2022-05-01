@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import styled, { css } from "styled-components";
 
 const TimerBox = styled.div`
@@ -19,7 +19,7 @@ const Timer = ({ m, s, narration }) => {
   const [min, setMin] = useState(parseInt(m));
   const [sec, setSec] = useState(parseInt(s));
 
-  const padNumber = useMemo((num) => {
+  const padNumber = useCallback((num) => {
     return String(num).padStart(2, "0");
   }, []);
 

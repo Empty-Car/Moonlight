@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 

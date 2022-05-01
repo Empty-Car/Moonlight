@@ -34,7 +34,7 @@ const EmotionDiary = () => {
     }
   }, []);
 
-  const changeDate = (month) => {
+  const changeDate = useCallback((month) => {
     let prevMonthLastDate = new Date(YEAR, month - 1, 0).getDate();
     let prevMonthLastDay = new Date(YEAR, month - 1, 0).getDay();
 
@@ -62,7 +62,7 @@ const EmotionDiary = () => {
     setLenThisMonth(thisMonthDateArr.length);
 
     return prevMonthDateArr.concat(thisMonthDateArr, nextMonthDateArr);
-  };
+  }, []);
 
   useEffect(() => {
     setTotalDate(changeDate(month));
