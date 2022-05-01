@@ -12,9 +12,10 @@
 
 ---
 
-Sponsor: 휘뚜루마뚜루
+Sponsor: 휘뚜루마뚜루 \
 Music From: tunetank (https://tunetank.com/)
 
+___ 
 ### 컴포넌트 구조
 
 - Signin

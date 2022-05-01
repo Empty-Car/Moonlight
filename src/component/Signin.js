@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { NonTokenInstance } from "../axios";
 import SignupModal from "./SignupModal";
@@ -54,10 +54,10 @@ const Signin = () => {
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
 
-  const onSetHandler = (e) => {
+  const onSetHandler = useCallback(e => {
     const name = e.target.name;
     setInputs({ ...inputs, [name]: e.target.value });
-  };
+  }, [inputs]);
 
   const activeButtonClick = async () => {
     const res = await NonTokenInstance.post("/v1/user/token", {
@@ -72,12 +72,13 @@ const Signin = () => {
     localStorage.setItem("user_id", resData.user_id);
   };
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     setIsModal(true);
-  };
-  const closeModal = () => {
+    console.log("openModal");
+  }, []);
+  const closeModal = useCallback(() => {
     setIsModal(false);
-  };
+  }, []);
 
   return (
     <SignupDiv>

@@ -44,4 +44,4 @@ const SignupModal = ({ isModal, closeModal }) => {
   );
 };
 
-export default SignupModal;
+export default React.memo(SignupModal);

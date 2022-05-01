@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { NonTokenInstance } from "../axios";
 
@@ -16,10 +16,13 @@ const Signup = ({ closeModal }) => {
   });
   const { email, name, password } = inputs;
 
-  const onSetHandler = (e) => {
-    const name = e.target.name;
-    setInputs({ ...inputs, [name]: e.target.value });
-  };
+  const onSetHandler = useCallback(
+    (e) => {
+      const name = e.target.name;
+      setInputs({ ...inputs, [name]: e.target.value });
+    },
+    [inputs]
+  );
 
   const activeButtonClick = async () => {
     const res = await NonTokenInstance.post("/v1/user", {
@@ -67,4 +70,4 @@ const Signup = ({ closeModal }) => {
   );
 };
 
-export default Signup;
+export default React.memo(Signup);
