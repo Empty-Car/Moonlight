@@ -3,10 +3,29 @@ import styled from "styled-components";
 import { NonTokenInstance } from "../axios";
 
 const SignupDiv = styled.div``;
-const EmailInput = styled.input``;
-const NicknameInput = styled.input``;
-const PasswordInput = styled.input``;
-const ActiveButton = styled.button``;
+
+const InputStyle = styled.input`
+  padding: 12px;
+  border: 2px solid #f8a6a6;
+  width: 50%;
+  height: 20px;
+  font-size: 18px;
+  box-sizing: border-box;
+
+  margin-top: 10px;
+`;
+
+const ActiveButton = styled.button`
+  width: 80%;
+  height: 50px;
+  margin-top: 50px;
+  border: none;
+  background-color: #f8a6a6;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+`;
 
 const Signup = ({ closeModal }) => {
   const [inputs, setInputs] = useState({
@@ -38,28 +57,28 @@ const Signup = ({ closeModal }) => {
     <SignupDiv>
       <div>
         Email
-        <EmailInput
+        <InputStyle
           value={email}
           name="email"
           onChange={onSetHandler}
-        ></EmailInput>
+        ></InputStyle>
       </div>
       <div>
         Name
-        <NicknameInput
+        <InputStyle
           value={name}
           name="name"
           onChange={onSetHandler}
-        ></NicknameInput>
+        ></InputStyle>
       </div>
       <div>
         Password
-        <PasswordInput
+        <InputStyle
           value={password}
           type="password"
           name="password"
           onChange={onSetHandler}
-        ></PasswordInput>
+        ></InputStyle>
       </div>
       <div>
         <ActiveButton onClick={activeButtonClick}>

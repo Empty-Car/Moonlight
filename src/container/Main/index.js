@@ -1,7 +1,7 @@
 import Main from "../../component/Main";
 
 const MainContainer = () => {
-  return <Main />;
+  return <Main />
 };
 
 export default MainContainer;

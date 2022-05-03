@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export const Instance = axios.create({
-  baseURL: "http://54.180.165.105:8081",
+  baseURL: "http://54.180.219.114:8080",
 });
 
 export const NonTokenInstance = axios.create({
-  baseURL: "http://54.180.165.105:8081",
+  baseURL: "http://54.180.219.114:8080",
 });
 
 Instance.interceptors.request.use((config) => {

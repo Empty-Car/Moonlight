@@ -5,10 +5,7 @@ import SignupModal from "./SignupModal";
 import { useNavigate } from "react-router-dom";
 
 const SignupDiv = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 100px;
 `;
 const InputStyle = styled.input`
   padding: 12px;

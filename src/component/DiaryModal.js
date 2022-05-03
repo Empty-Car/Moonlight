@@ -91,9 +91,13 @@ const SaveButton = styled.button`
   cursor: pointer;
   outline: none;
   border: none;
+  background-color: #ff7473;
+  color: white;
+  width: 100px;
+  height: 30px;
 
-  display: flex;
-  justify-content: flex-end;
+  margin-left: 700px;
+  margin-top: 300px;
 `;
 
 export const dateToString = (date) => {
