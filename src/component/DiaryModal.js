@@ -85,6 +85,8 @@ const DiaryInput = styled.input`
   resize: none;
   border: none;
   height: 60px;
+
+  font-size: 20px;
 `;
 
 const SaveButton = styled.button`
