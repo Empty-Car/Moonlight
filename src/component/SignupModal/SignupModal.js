@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Signup from "./Signup";
+import Signup from "../Signup/Signup";
 import { MdClose } from "react-icons/md";
 
 const Background = styled.div`

@@ -1,4 +1,4 @@
-import EmotionDiary from "../../component/EmotionDiary";
+import EmotionDiary from "../../component/EmotionDiary/EmotionDiary";
 
 const EmotionDiaryContainer = () => {
   return <EmotionDiary />;

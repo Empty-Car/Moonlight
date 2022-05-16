@@ -1,9 +1,9 @@
-import styled  from "styled-components";
+import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { MdPause, MdPlayArrow } from "react-icons/md";
-import { useAudio } from "../hooks/useAudio";
-import backgroundMusic from "../asset/audio/background_music.mp3";
-import Logo from "../asset/img/logo.svg";
+import { useAudio } from "../../hooks/useAudio";
+import backgroundMusic from "../../asset/audio/background_music.mp3"
+import Logo from "../../asset/img/logo.svg";
 
 const HeaderBox = styled.div`
   position: fixed;

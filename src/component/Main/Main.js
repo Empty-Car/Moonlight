@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { WISESAYING } from "../constant";
+import { WISESAYING } from "../../constant";
 
 const MainBox = styled.div`
   margin-top: 100px;

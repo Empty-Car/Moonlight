@@ -1,4 +1,4 @@
-import Main from "../../component/Main";
+import Main from "../../component/Main/Main";
 
 const MainContainer = () => {
   return <Main />

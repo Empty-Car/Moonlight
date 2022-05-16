@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import CalBody from "./CalBody";
-import CalHead from "./CalHead";
+import CalBody from "../CalBody/CalBody";
+import CalHead from "../CalHead/CalHead";
 import { useNavigate } from "react-router-dom";
 
 const Calendar = styled.div`

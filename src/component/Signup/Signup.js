@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { NonTokenInstance } from "../axios";
+import { NonTokenInstance } from "../../axios";
 
 const SignupDiv = styled.div``;
 

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Header from "../component/Header";
+import Header from "../component/Header/Header";
 import {
   MainContainer,
   SigninContainer,

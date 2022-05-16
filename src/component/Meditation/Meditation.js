@@ -1,9 +1,9 @@
 import gsap from "gsap";
 import React, { useEffect, useState, useCallback } from "react";
 import styled, { css } from "styled-components";
-import Timer from "./Timer";
-import { useAudio } from "../hooks/useAudio";
-import sound from "../asset/audio/breathChange.mp3";
+import Timer from "../Timer/Timer";
+import { useAudio } from "../../hooks/useAudio";
+import sound from "../../asset/audio/breathChange.mp3";
 import { useNavigate } from "react-router-dom";
 
 const MeditationBox = styled.div`

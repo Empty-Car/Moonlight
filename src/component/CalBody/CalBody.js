@@ -1,11 +1,5 @@
-import styled from "styled-components";
-import Dates from "./Dates";
-
-const Form = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  width: 60%;
-`;
+import Dates from "../Dates/Dates";
+import * as S from "./styles"
 
 const CalBody = ({ totalDate, year, month, today, prevLength, thisLength }) => {
   const todayMonth = new Date().getMonth() + 1;
@@ -20,7 +14,7 @@ const CalBody = ({ totalDate, year, month, today, prevLength, thisLength }) => {
   const nextMonthIdx = prevLength + thisLength;
 
   return (
-    <Form>
+    <S.Form>
       {totalDate.map((date, idx) => {
         return (
           <Dates
@@ -39,7 +33,7 @@ const CalBody = ({ totalDate, year, month, today, prevLength, thisLength }) => {
           ></Dates>
         );
       })}
-    </Form>
+    </S.Form>
   );
 };
 

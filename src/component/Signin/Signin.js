@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { NonTokenInstance } from "../axios";
-import SignupModal from "./SignupModal";
+import { NonTokenInstance } from "../../axios";
+import SignupModal from "../SignupModal/SignupModal";
 import { useNavigate } from "react-router-dom";
 
 const SignupDiv = styled.div`

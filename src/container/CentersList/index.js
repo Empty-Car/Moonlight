@@ -1,4 +1,4 @@
-import CentersList from "../../component/CentersList";
+import CentersList from "../../component/CenterList/CenterList";
 
 const CentersListContainer = () => {
   return <CentersList />;

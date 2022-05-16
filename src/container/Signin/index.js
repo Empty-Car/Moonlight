@@ -1,4 +1,4 @@
-import Signin from "../../component/Signin";
+import Signin from "../../component/Signin/Signin";
 
 const SigninContainer = () => {
   return <Signin />;
